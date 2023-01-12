@@ -1,0 +1,371 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>POETRY</h2>
+					<p>(<a href="https://python-poetry.org">https://python-poetry.org</a>)</p>
+				</section>
+				<section>
+					<h2>¿QUE ES POETRY?</h2>
+					<p>
+						Administrador de paquetes y dependencias para tu proyecto de python
+					</p>
+					
+				</section>
+				<section>
+					<h2>¿Quienes usan poetry?</h2>
+					<ul>
+						<li><a href="https://github.com/tiangolo/fastapi">fastapi</a></li>
+						<li><a href="https://github.com/falconry/falcon">falcon</a></li>
+						<li><a href="https://github.com/django/django">django</a></li>
+						<li><a href="https://github.com/tortoise/tortoise-orm/">tortoise orm</a></li>
+						<li><a href="https://github.com/psf/requests">requests</a></li>
+					</ul>
+					<p>Todos estan usando poetry...</p>
+					
+				</section>
+				<section>
+					<h2>Preguntas frecuentes</h2>
+					<p>
+						<span class="fragment" data-fragment-index="1">¿Poetry remplaza el requirements.txt?</span> 
+						<span style="color: RED;" class="fragment" data-fragment-index="2">NO</span>
+					</p>
+					<p>
+						<span class="fragment" data-fragment-index="3">¿Poetry remplaza pip?</span>
+						<span class="fragment" data-fragment-index="4" style="color: red;">NO, lo potencia</span> 
+					</p>
+					<p>
+						<span class="fragment" data-fragment-index="5">¿Poetry remplaza el entorno virtual?</span>
+						<span class="fragment" data-fragment-index="6" style="color: green;">
+							Aunque interactua con el entorno virtual, tiene la posibilidad de configurarlo.
+						</span>
+					</p>
+					<p>
+						<span class="fragment" data-fragment-index="7">¿Poetry es compatible con docker?</span>
+						<span class="fragment" data-fragment-index="8" style="color: green;">
+							Si
+						</span>
+					</p>
+				</section>
+				<section>
+					<section>
+						<h2>Instalar</h2>
+						<p>
+							<a style="font-size: medium;" href="https://python-poetry.org/docs/#installation">https://python-poetry.org/docs/#installation</a>
+						</p>
+						<div data-markdown>
+							<textarea data-template>
+								```bash
+								curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+								```
+								
+								Verificar instalación y ver version
+								```bash
+								poetry --version
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<h4>si el comando poetry no es encontrado</h4>
+							<div data-markdown>
+								<textarea data-template>
+									Abrir .bashrc
+									```bash
+									nano ~/.bashrc
+									```
+									Agregrar y guardar archivo 
+									```bash
+									export PATH="$HOME/.poetry/bin:$PATH"
+									```
+									reiniciar .bashrc
+									```bash
+									source ~/.bashrc
+									```
+								</textarea>
+							</div>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>¡Trabajemos con poetry!</h2>
+						<div data-markdown>
+							<textarea data-template>
+								Crear proyecto con poetry
+								```bash
+								poetry new my-project
+								```
+								
+								Agregar poetry a un proyecto existente
+								```bash
+								poetry init
+								```
+
+								El proyecto ya contiene el archivo pyproject.toml
+								```bash
+								poetry install
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<p><b>poetry new</b> crea la siguiente estructura de carpetas por defecto</p>
+						<a href="https://python-poetry.org/docs/cli/#new"></a>
+						<div data-markdown>
+							<textarea data-template>
+								```bash
+								my-project
+								├── pyproject.toml
+								├── README.rst
+								├── src
+								│   └── my-project
+								│       └── __init__.py
+								└── tests
+									├── __init__.py
+									└── test_my_package.py
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<p>
+							<b>poetry init</b> solo crea el archivo de administración de paquetes
+							(pyproject.toml), ingresando solo configuraciones iniciales.
+						</p>
+						<a href="https://python-poetry.org/docs/cli/#init">https://python-poetry.org/docs/cli/#init</a>
+						<p>(Mi preferido)</p>
+					</section>
+
+				</section>
+				<section>
+					<section>
+						<h2>Agregar nuevo paquete</h2>
+						<img class="fragment" data-fragment-index="1" src="img/aqui_no_hacemos_eso.jpg" width="700" height="400">
+					</section>
+					<section>
+						<div data-markdown>
+							<textarea data-template>
+								Puedes agregar paquetes con el siguiente comando
+								```bash
+								poetry add {paquete_1} {paquete_2}
+								```
+								<br>
+								Otros comandos permitidos son:
+
+								```bash
+								poetry add pendulum@^2.0.5
+								poetry add pendulum@latest
+								poetry add git+https://github.com/sdispater/pendulum.git
+
+								poetry add pendulum@^2.0.5 --dev
+								```
+								Para eliminar paquete utiliza:
+								```bash
+								poetry remove {paquete}
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<img src="img/pero_que_ha_pasao.jpg.opdownload" width="600" height="400">
+					</section>
+					<section>
+						<p>miremos el archivo pyproject.toml</p> 
+						<div data-markdown>
+							<textarea data-template>
+								```toml
+								[tool.poetry]
+								name = "poetry-examples"
+								version = "0.1.0"
+								description = "usin poetry init"
+								authors = ["Denis Gonzalez <denis.eduardo@zinobe.com>"]
+
+								[tool.poetry.dependencies]
+								python = "^3.10"
+								mongoengine = "^0.24.1"
+
+								[tool.poetry.dev-dependencies]
+
+								[build-system]
+								requires = ["poetry-core>=1.0.0"]
+								build-backend = "poetry.core.masonry.api"
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<div data-markdown>
+							<textarea data-template>
+								creemos un pequeño script (main.py)
+								```python
+								from mongoengine import connect
+
+								con = connect(host="mongodb://127.0.0.1:27017/test")
+								print(con)
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<div data-markdown>
+							<textarea data-template>
+								intenta ejecutar el main.py
+								```python
+								python3 main.py
+								```
+							</textarea>
+						</div>
+						<img class="fragment" data-fragment-index="1" src="img/not_working.gif" width="700" height="400">
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Poetry y el entorno virtual</h2>
+						<div data-markdown>
+							<textarea data-template>
+								Al momento de agregar el primer paquete a poetry, este creara un entorno virtual 
+								ubicado en una carpeta cache, para ejecutar el archivo con ese entorno virtual 
+								solo debemos ejecutar el siguiente comando:
+								```python
+								poetry run python main.py
+								```
+							</textarea>
+						</div>
+					</section>
+					<section>
+						<div data-markdown>
+							<textarea data-template>
+								Si queremos tener el entorno virtual siempre activo podemos ejecutar
+								```python
+								poetry shell
+								```
+								y para salir del entorno virtual
+								```python
+								exit
+								```
+							</textarea>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h2>¿Que paquetes tengo?</h2>
+					<div data-markdown>
+						<textarea data-template>
+							Puedes usar el siguiente comando para ver los que tienes instalado con poetry
+							```python
+							poetry show
+							```
+							<br>
+							vamos un poco mas allá, intenta usar 
+							
+							```python
+							poetry show --tree
+							```
+						</textarea>
+					</div>
+				</section>
+				<section>
+					<h2>¡Ahora quiero mi requirements.txt!</h2>
+					<div class="fragment" data-fragment-index="1" data-markdown>
+						<textarea data-template>
+							Utiliza el siguiente comando para exportar los paquetes
+							en el formato que requirements.txt lo requiere
+							```python
+							poetry export -f requirements.txt --output requirements.txt
+							```
+						</textarea>
+					</div>
+					<p class="fragment" data-fragment-index="2" style="font-size: medium;">
+						Este archivo contiene todos los paquetes instalados, incluyendo
+						los subpaquetes, pero con el comando de poetry show --tree podemos 
+						ver cuales son los principales y hacer una eliminación manual del 
+						resto de paquetes en el requirements.txt
+					</p>
+				</section>
+				<section>
+					<h2>Configuración local de poetry</h2>
+					<a style="font-size: medium;" href="https://python-poetry.org/docs/configuration/">https://python-poetry.org/docs/configuration/</a>
+					<div data-markdown>
+						<textarea data-template>
+							Para ver la configuración local de poetry use el comando
+							```python
+							poetry config --list
+							```
+						</textarea>
+					</div>
+				</section>
+				<section>
+					<h2>Resumen de comandos</h1>
+					<div data-markdown>
+						<textarea data-template>
+							```bash [1-28]
+							# crear nuevo proyecto usando poetry
+							poetry new {project name}
+							# Agregar poetry a un proyecto existente
+							poetry init
+							# Cuando el proyecto ya usa poetry
+							poetry install {project name}
+							# Cuando el proyecto ya usa poetry
+							poetry install {project name}
+							# Agregar paquete
+							poetry add {paquete_1} {paquete_2}
+							# Remover paquete del proyecto
+							poetry remove {paquete}
+							# Ejecutar comando con el entorno virtual de poetry
+							poetry run python {script.py}
+							# Activar el entorno virtual
+							poetry shell
+							# Salir del entorno virtual
+							exit
+							# Ver paquetes instalados
+							poetry show
+							# Ver paquetes instalados en forma de arbol
+							poetry show --tree
+							# Crear el requirements.txt
+							poetry export -f requirements.txt --output requirements.txt
+							# Ver configuración local de poetry
+							poetry config --list
+							# De requirements.txt a poetry
+							cat requirements.txt | xargs poetry add
+							```
+						</textarea>
+					</div>
+				</section>
+				<section>
+					<h1>Gracias</h1>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
